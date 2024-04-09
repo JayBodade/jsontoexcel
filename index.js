@@ -43,7 +43,7 @@ app.get('/download',async(req,res)=>{
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     res.setHeader('Content-Disposition', 'attachment; filename="data.xlsx"');
 
-    res.send(file);
+     return res.send(file);
 })
 
 
