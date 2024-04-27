@@ -20,6 +20,7 @@ app.post('/jsontoexcel', async (req, res) => {
 
     try {
         const workbook = new ExcelJS.Workbook();
+        console.log(req);
         console.log(req.body.data);
         const data = req.body.data;
         data?.forEach((ele, index) => {
