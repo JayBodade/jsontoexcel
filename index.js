@@ -20,8 +20,8 @@ app.post('/jsontoexcel', async (req, res) => {
 
     try {
         const workbook = new ExcelJS.Workbook();
-        const body = req.body;
-        body.forEach((ele, index) => {
+        const data = req.body.data;
+        data.forEach((ele, index) => {
             let sheet = workbook.addWorksheet(`sheet${index + 1}`)
             sheet.columns = extractHeaders(ele);
             ele.forEach((item) => {
@@ -39,11 +39,15 @@ app.post('/jsontoexcel', async (req, res) => {
 
 
 app.get('/download',async(req,res)=>{
+    try{
     const file = fs.readFileSync('multi_sheet_excel.xlsx');
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     res.setHeader('Content-Disposition', 'attachment; filename="data.xlsx"');
 
      return res.send(file);
+    }catch(err){
+        return res.json({success:false,message:err.message});
+    }
 })
 
 
