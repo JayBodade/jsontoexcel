@@ -34,7 +34,7 @@ app.post('/jsontoexcel', async (req, res) => {
 
           const workbook = new ExcelJS.Workbook();
            const data = req.body.data;
-
+            console.log(data);
         let sheet = workbook.addWorksheet(`datasheet`)
             sheet.columns = extractHeaders(data);
 
