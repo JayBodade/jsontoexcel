@@ -27,9 +27,9 @@ app.post('/jsontoexcel', async (req, res) => {
         data?.forEach((ele, index) => {
             let sheet = workbook.addWorksheet(`sheet${index + 1}`)
             sheet.columns = extractHeaders(ele);
-            // ele?.forEach((item) => {
-            //     sheet.addRow(item);
-            // })
+             ele?.forEach((item) => {
+                 sheet.addRow(item);
+             })
         })
 
         //   const workbook = new ExcelJS.Workbook();
