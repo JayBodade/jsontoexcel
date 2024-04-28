@@ -19,17 +19,27 @@ app.post('/jsontoexcel', async (req, res) => {
 
 
     try {
-        const workbook = new ExcelJS.Workbook();
+        // const workbook = new ExcelJS.Workbook();
         // console.log(req);
-        console.log(req.params);
-        console.log(req.body.data);
-        const data = req.body.data;
-        data?.forEach((ele, index) => {
-            let sheet = workbook.addWorksheet(`sheet${index + 1}`)
-            sheet.columns = extractHeaders(ele);
-            ele?.forEach((item) => {
-                sheet.addRow(item);
-            })
+        // console.log(req.params);
+        // console.log(req.body.data);
+        // const data = req.body.data;
+        // data?.forEach((ele, index) => {
+        //     let sheet = workbook.addWorksheet(`sheet${index + 1}`)
+        //     sheet.columns = extractHeaders(ele);
+        //     // ele?.forEach((item) => {
+        //     //     sheet.addRow(item);
+        //     // })
+        // })
+
+          const workbook = new ExcelJS.Workbook();
+           const data = req.body.data;
+
+        let sheet = workbook.addWorksheet(`datasheet`)
+            sheet.columns = extractHeaders(data);
+
+        data.forEach((ele, index) => {
+                sheet.addRow(ele);
         })
 
         await workbook.xlsx.writeFile('multi_sheet_excel.xlsx');
